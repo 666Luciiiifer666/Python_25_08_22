@@ -5,9 +5,9 @@
 # новая_переменная = знач_если_да if условие else знач_если_нет
 
 #####################################################
-# my_string = '0123456789'
-# for symb_1 in my_string:
-#     for symb_2 in my_string:
-#             number = symb_2 if int(symb_1) == 0 else symb_1 + symb_2
-#
-#
+my_string = '0123456789'
+
+for symb_1 in my_string:
+    for symb_2 in my_string:
+        number = int(symb_2) if int (symb_1) == 0 else int(symb_1 + symb_2)
+        print(type(number), (number))
