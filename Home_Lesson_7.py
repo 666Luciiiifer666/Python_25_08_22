@@ -92,24 +92,26 @@ for value in my_list:
 #
 # 11. Дана строка my_str. Создать список в который поместить те символы из my_str,
 # которые встречаются в строке ТОЛЬКО ОДИН раз.
-my_str = "trollo"
-my_list = []
-for symbol in my_str:
-    amount = my_str.count(symbol)
-    if amount == 1:
-        my_list.append(symbol)
+# my_str = "trollo"
+# my_list = []
+# my_set = set(my_str)
+# for symbol in my_set:
+#     amount = my_str.count(symbol)
+#     if amount == 1:
+#         my_list.append(symbol)
+# print(my_list)
 
 #
 # 12. Даны две строки. Создать список в который поместить те символы,
 # которые есть в обеих строках хотя бы раз.
-my_str_1 = "qwerty"
-my_str_2 = "qryip"
-my_list = []
-for symb_1 in my_str_1:
-    for symb_2 in my_str_2:
-        if symb_1 == symb_2:
-            my_list.append(symb_1)
-my_list = list(set(my_list))
+# my_str_1 = "qwerty"
+# my_str_2 = "qryip"
+# my_list = []
+# for symb_1 in my_str_1:
+#     for symb_2 in my_str_2:
+#         if symb_1 == symb_2:
+#             my_list.append(symb_1)
+# my_list = list(set(my_list))
 
 #
 # 13. Даны две строки. Создать список в который поместить те символы, которые есть в обеих строках,
@@ -118,8 +120,14 @@ my_list = list(set(my_list))
 my_str1 = "aaaasdf1"
 my_str2 = "asdfff2"
 my_list = []
-new_str1 = ""
-for symb_1 in my_str1:
-    for symb_2 in my_str2:
-        if my_str1.count(symb_1) == 1 and my_str2.count(symb_2) == 1 and symb_1 == symb_2:
-            my_list.append(symb_1)
+my_list1 = set()
+my_list2 = set()
+for symbol in my_str1:
+    amount = my_str1.count(symbol)
+    if amount == 1:
+        my_list1.add(symbol)
+for symbol in my_str2:
+    amount = my_str2.count(symbol)
+    if amount == 1:
+        my_list2.add(symbol)
+my_list = my_list1 & my_list2
