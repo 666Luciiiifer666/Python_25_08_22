@@ -119,15 +119,9 @@ my_list = list(set(my_list))
 # Пример: для строк "aaaasdf1" и "asdfff2" ответ ["s", "d"], т.к. эти символы есть в каждой строке по одному разу
 my_str1 = "aaaasdf1"
 my_str2 = "asdfff2"
-my_list = []
-my_list1 = set()
-my_list2 = set()
-for symbol in my_str1:
-    amount = my_str1.count(symbol)
-    if amount == 1:
-        my_list1.add(symbol)
-for symbol in my_str2:
-    amount = my_str2.count(symbol)
-    if amount == 1:
-        my_list2.add(symbol)
-my_list = my_list1 & my_list2
+common_elements = list(set(my_str1) & set(my_str2))
+unique_common_elements = []
+
+for element in common_elements:
+    if my_str1.count(element) == 1 and my_str2.count(element) == 1:
+        unique_common_elements.append(element)
