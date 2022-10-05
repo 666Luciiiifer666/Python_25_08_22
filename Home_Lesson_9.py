@@ -16,6 +16,9 @@ def line_reversal(my_list):
             new_list.append(str_)
     return new_list
 
+my_list = "qwe"
+new_list = line_reversal(my_list)
+
 
 #####################################################
 # 2. Написать функцию которой передается один параметр - список строк my_list.
@@ -28,6 +31,11 @@ def elements_with_letter_a(my_list):
          if "a" == str_[0]:
             new_list.append(str_)
     return new_list
+
+
+my_list = ["appe", "htpat"]
+new_list = elements_with_letter_a(my_list)
+
 ########################################################
 
 
@@ -41,6 +49,10 @@ def elements_with_letter_a_anywhere(my_list):
         if "a" in str_:
             new_list.append(str_)
     return new_list
+
+
+my_list = ["appe", "htpat"]
+new_list = elements_with_letter_a_anywhere(my_list)
 ##########################################################################
 
 # 4. Написать функцию которой передается один параметр - список строк my_list в
@@ -53,6 +65,9 @@ def get_string_list(my_list):
         if isinstance(value, str):
             result_list.append(value)
     return result_list
+
+my_list = [1, 2, 3, "11", "22", 33]
+result_list = get_string_list(my_list)
 #################################################################
 # 5. Написать функцию которой передается один параметр - строка my_str.
 # Функция возвращает новый список в котором содержаться те символы из my_str,
@@ -66,6 +81,10 @@ def get_unique_list(my_str):
         if amount == 1:
             my_list.append(symbol)
     return my_list
+
+
+my_str = "trollo"
+my_list = get_unique_list(my_str)
 ####################################################################
 # 6. Написать функцию которой передается два параметра - две строки.
 # Функция возвращает список в который поместить те символы,
@@ -79,23 +98,28 @@ def get_duplicate_symbols_list(my_str_1, my_str_2):
                 my_list.append(symb_1)
     my_list = list(set(my_list))
     return my_list
+
+
+my_str_1 = "qwerty"
+my_str_2 = "qryip"
+my_list = get_duplicate_symbols_list(my_str_1, my_str_2)
 ############################################################
 # 7. Написать функцию которой передается два параметра - две строки.
 # Функция возвращает список в который поместить те символы, которые есть в обеих строках,
 # но в каждой только по одному разу.
 def characters_in_lines_one_at_a_time(my_str1, my_str2):
-    my_list1 = set()
-    my_list2 = set()
-    for symbol in my_str1:
-        amount = my_str1.count(symbol)
-        if amount == 1:
-            my_list1.add(symbol)
-    for symbol in my_str2:
-        amount = my_str2.count(symbol)
-        if amount == 1:
-            my_list2.add(symbol)
-    my_list = my_list1 & my_list2
-    return my_list
+    common_elements = list(set(my_str1) & set(my_str2))
+    unique_common_elements = []
+
+    for element in common_elements:
+        if my_str1.count(element) == 1 and my_str2.count(element) == 1:
+            unique_common_elements.append(element)
+    return unique_common_elements
+
+my_str1 = "aaaasdf1"
+my_str2 = "asdfff2"
+unique_common_elements = characters_in_lines_one_at_a_time(my_str1, my_str2)
+
 ################################################################
 # 8. Даны списки names и domains (создать самостоятельно).
 # Написать функцию для генерирования e-mail в формате:
