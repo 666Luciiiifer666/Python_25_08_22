@@ -4,9 +4,9 @@
 
 file_name = "Files_homeworks/domains.txt"
 def domain_as_a_list(filename):
-    name = open(filename, "r")
-    text = name.read()
-    text = text.replace(".", "")
+ with open(filename, "r") as file:
+    text = file.read()
+    text = text.replace(".", "").split("\n")
     return(text)
 text = domain_as_a_list(file_name)
 
@@ -20,13 +20,17 @@ text = domain_as_a_list(file_name)
 file_name = "Files_homeworks/names.txt"
 
 def read_only_names(file_name):
-    file = open(file_name, 'r')
-    text = file.read()
-    text = text.split('\t')[1::3]
-    return text
+    result = list()
+    with open(file_name, 'r') as file:
+        file = file.read()
+        read_file = file.splitlines()
+        for line in read_file:
+            info = line.split('\t')
+            dates = info[1]
+            result.append(dates)
+    return result
 
-text = read_only_names(file_name)
-
+result = read_only_names(file_name)
 
 
 
@@ -41,16 +45,15 @@ input = "Files_homeworks/authors.txt"
 
 def parse_dates(input_file):
     result = list()
-    file = open(input_file, "r")
-    file = file.read()
-    read_file = file.splitlines()
-    for line in read_file:
-        if line != "":
-            info = line.split('-')
-            dates = info[0]
-
-            if len(dates.split()) > 2:
-                result.append({'date': dates})
+    with open(input_file, "r") as file:
+        file = file.read()
+        read_file = file.splitlines()
+        for line in read_file:
+             if line != "":
+                info = line.split('-')
+                dates = info[0]
+                if len(dates.split()) > 2:
+                    result.append({'date': dates})
     return result
 
 
