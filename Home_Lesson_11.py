@@ -15,6 +15,7 @@ def generate_txt_data (lenght):
     return final_str
 
 final_str = generate_txt_data (lenght)
+
 #
 
 
@@ -27,26 +28,38 @@ final_str = generate_txt_data (lenght)
 # или True/False. Выбор значения должен быть равновероятным. Т.е. вероятность того, что значение будет целым
 # такая же, как и вероятность того, что будет типа float или типа bool
 
-lenght = rnd.randint(5, 20)
+lenght_ = rnd.randint(5, 20)
 def generate_json_data(lenght):
 
     data = []
-    for _ in range(lenght):
+    for _ in range(lenght_):
         keys = ''.join(rnd.choice(string.ascii_lowercase) for _ in range(5))
         values = rnd.choice([rnd.randint(-100, 100), rnd.random(), rnd.choice([True, False])])
         dict = {keys: values}
         data.append(dict)
         json_data = json.dumps(data)
     return json_data
-json_data = generate_json_data(lenght)
+json_data = generate_json_data(lenght_)
 
 
+#
+# Функция generate_and_write_file. Написать функцию которая принимает один параметр - полный путь к файлу.
+# В зависимости от расширения файла (txt, json) сгенерировать данные для записи и записать в данный файл.
+# Если расширение не соответствует заданным, то вывести текст "Unsupported file format"
+#
+# Разрешается создавать дополнительные (вспомогательные) функции.
 
-Функция generate_and_write_file. Написать функцию которая принимает один параметр - полный путь к файлу.
-В зависимости от расширения файла (txt, json) сгенерировать данные для записи и записать в данный файл.
-Если расширение не соответствует заданным, то вывести текст "Unsupported file format"
 
-Разрешается создавать дополнительные (вспомогательные) функции.
+filename = "C:\\Users\\user\\PycharmProjects\\Python_25_08_22\\Files_homeworks\\json_filed.json"
 
+def generate_and_write_file(filename):
 
+    if filename.split('.')[-1] == 'json':
+        data = generate_json_data(lenght_)
+    elif filename.split('.')[-1] == 'txt':
+        data = generate_txt_data(lenght)
+    else:
+        data = "Unsupported file format"
+    return data
 
+data = generate_and_write_file(filename)
