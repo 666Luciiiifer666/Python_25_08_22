@@ -31,6 +31,7 @@ final_str = generate_txt_data (lenght)
 lenght_ = rnd.randint(5, 20)
 def generate_json_data(lenght):
 
+    global json_data
     data = []
     for _ in range(lenght_):
         keys = ''.join(rnd.choice(string.ascii_lowercase) for _ in range(5))
@@ -38,7 +39,7 @@ def generate_json_data(lenght):
         dict = {keys: values}
         data.append(dict)
         json_data = json.dumps(data)
-    return json_data
+    return json_data, data
 json_data = generate_json_data(lenght_)
 
 
@@ -53,7 +54,6 @@ json_data = generate_json_data(lenght_)
 filename = "C:\\Users\\user\\PycharmProjects\\Python_25_08_22\\Files_homeworks\\json_filed.json"
 
 def generate_and_write_file(filename):
-
     if filename.split('.')[-1] == 'json':
         data = generate_json_data(lenght_)
     elif filename.split('.')[-1] == 'txt':
@@ -63,3 +63,10 @@ def generate_and_write_file(filename):
     return data
 
 data = generate_and_write_file(filename)
+
+
+def write_data(filename):
+    with open(filename, 'w') as file:
+        json.dump(data, file)
+    return data
+write_data(filename)
