@@ -54,5 +54,5 @@ def sort_by_years(a: str) -> int:
     return year
 
 
-sorted_by_year = sorted(data, key=lambda x: sort_by_years(x["years"]))
+sorted_by_year = sorted(data, key=lambda data: sort_by_years(data["years"]))
 
