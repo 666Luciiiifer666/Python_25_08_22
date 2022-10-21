@@ -14,12 +14,12 @@ def rounding_after_decimal_point(number):
 
 def current_data_state():
     with open(current_data_location) as file:
-        data = json.load(file)
-        exchange_rate = data.get('course')
-        uah = data.get('UAH')
-        usd = data.get('USD')
-        delta = data.get('delta')
-    return exchange_rate, uah, usd, delta, data
+        local_data = json.load(file)
+        local_exchange_rate = local_data.get('course')
+        uah = local_data.get('UAH')
+        usd = local_data.get('USD')
+        local_delta = local_data.get('delta')
+    return local_exchange_rate, uah, usd, local_delta, local_data
 
 
 data_of_current_recording = current_data_state()
@@ -35,59 +35,59 @@ def current_data_recording(money_available):
         json.dump(money_available, file)
 
 
-def rate(exchange_rate):
-    print(exchange_rate)
+def rate(local_exchange_rate):
+    print(local_exchange_rate)
 
 
-def available(usd_available, uah_available):
-    print('USD', usd_available, 'UAH', uah_available)
+def available(local_usd_available, local_uah_available):
+    print('USD', local_usd_available, 'UAH', local_uah_available)
 
 
-def buy_xxx(amount, uah_available, usd_available, exchange_rate):
-    amount_in_uah = amount * exchange_rate
-    if uah_available >= amount_in_uah:
-        uah_available -= rounding_after_decimal_point(amount_in_uah)
-        usd_available += rounding_after_decimal_point(amount)
-        uah_usd_available_update = {"USD": usd_available,
-                                    "UAH": uah_available}
+def buy_xxx(amount, local_uah_available, local_usd_available, local_exchange_rate):
+    amount_in_uah = amount * local_exchange_rate
+    if local_uah_available >= amount_in_uah:
+        local_uah_available -= rounding_after_decimal_point(amount_in_uah)
+        local_usd_available += rounding_after_decimal_point(amount)
+        uah_usd_available_update = {"USD": local_usd_available,
+                                    "UAH": local_uah_available}
         data.update(uah_usd_available_update)
         current_data_recording(data)
     else:
-        print('REQUIRED BALANCE UAH ', amount_in_uah, ' AVAILABLE ', uah_available)
+        print('REQUIRED BALANCE UAH ', amount_in_uah, ' AVAILABLE ', local_uah_available)
 
 
-def sell_xxx(amount, usd_available, uah_available, exchange_rate):
-    amount_in_uah = amount * exchange_rate
-    if usd_available >= amount:
-        uah_available += rounding_after_decimal_point(amount_in_uah)
-        usd_available -= rounding_after_decimal_point(amount)
-        uah_usd_available_update = {"USD": usd_available,
-                                    "UAH": uah_available}
+def sell_xxx(amount, local_usd_available, local_uah_available, local_exchange_rate):
+    amount_in_uah = amount * local_exchange_rate
+    if local_usd_available >= amount:
+        local_uah_available += rounding_after_decimal_point(amount_in_uah)
+        local_usd_available -= rounding_after_decimal_point(amount)
+        uah_usd_available_update = {"USD": local_usd_available,
+                                    "UAH": local_uah_available}
         data.update(uah_usd_available_update)
         current_data_recording(data)
     else:
-        print('REQUIRED BALANCE USD ', amount, ' AVAILABLE ', usd_available)
+        print('REQUIRED BALANCE USD ', amount, ' AVAILABLE ', local_usd_available)
 
 
-def buy_all(usd_available, uah_available, exchange_rate):
-    value_usd = uah_available / exchange_rate
-    uah_usd_available_update = {"USD": usd_available + rounding_after_decimal_point(value_usd),
-                                "UAH": uah_available - rounding_after_decimal_point(exchange_rate * value_usd)}
+def buy_all(local_uah_available, local_exchange_rate, local_usd_available):
+    value_usd = local_uah_available / local_exchange_rate
+    uah_usd_available_update = {"USD": local_usd_available + rounding_after_decimal_point(value_usd),
+                                "UAH": local_uah_available - rounding_after_decimal_point(local_exchange_rate * value_usd)}
     data.update(uah_usd_available_update)
     current_data_recording(data)
 
 
-def sell_all(usd_available, uah_available, exchange_rate):
-    value_uah = usd_available * exchange_rate
+def sell_all(local_usd_available, local_uah_available, local_exchange_rate):
+    value_uah = local_usd_available * local_exchange_rate
     uah_usd_available_update = {"USD": 0,
-                                "UAH": uah_available + rounding_after_decimal_point(value_uah)}
+                                "UAH": local_uah_available + rounding_after_decimal_point(value_uah)}
     data.update(uah_usd_available_update)
     current_data_recording(data)
 
 
-def next_step(exchange_rate, delta):
-    new_exchange_rate = rounding_after_decimal_point(random.triangular(exchange_rate - delta,
-                                                exchange_rate + delta))
+def next_step(local_exchange_rate, local_delta):
+    new_exchange_rate = rounding_after_decimal_point(random.triangular(local_exchange_rate - local_delta,
+                                                                       local_exchange_rate + local_delta))
     current_data_update = {"course": new_exchange_rate}
     data.update(current_data_update)
     current_data_recording(data)
