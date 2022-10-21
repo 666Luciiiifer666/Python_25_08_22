@@ -48,11 +48,12 @@ sorted_by_text_len = sorted(data, key=sort_by_text)
 # Кроме функций сортировки также надо написать их использование.
 
 
-def sort_by_years(a: str) -> int:
-    year = re.match(".+\s(\d+)\D", a).group(1)
-    year = -int(year) if ("bc" in a.lower()) else int(year)
+def sort_by_years(data):
+    data = data["years"]
+    year = re.match(".+\s(\d)+\D", data).group(1)
+    year = -int(year) if ("bc" in data.lower()) else int(year)
     return year
 
 
-sorted_by_year = sorted(data, key=lambda data: sort_by_years(data["years"]))
+sorted_by_year = sorted(data, key=sort_by_years)
 
