@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
-import utils as file
+from utils import *
+
 
 args = ArgumentParser()
 
@@ -11,25 +12,25 @@ action = args.get('action')
 amount = args.get('amount')
 
 if action == 'RATE':
-    file.rate()
+    rate(exchange_rate)
 
 elif action == 'AVAILABLE':
-    file.available()
+    available(usd_available, uah_available)
 
 elif action == 'BUY':
     if amount == 'ALL':
-        file.buy_all()
+        buy_all(uah_available, exchange_rate, usd_available)
     elif int(amount) > 0:
-        file.buy_xxx(amount)
+        buy_xxx(amount, uah_available, usd_available, exchange_rate)
 
 elif action == 'SELL':
     if amount == 'ALL':
-        file.sell_all()
+        sell_all(usd_available, uah_available, exchange_rate)
     elif int(amount) > 0:
-        file.sell_xxx(amount)
+        sell_xxx(amount, usd_available, uah_available, exchange_rate)
 
 elif action == 'NEXT':
-    file.next_step()
+    next_step(exchange_rate, delta)
 
 elif action == 'RESTART':
-    file.restart()
+    restart()
